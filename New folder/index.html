@@ -1,0 +1,429 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080817"><title>NEON GAME HUB | Game Shop</title>
+<style>
+:root{--bg:#080817;--cyan:#00eaff;--pink:#ff2bd6;--text:#f6f7ff;--muted:#b9bfd9}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#29124c 0%,var(--bg) 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif}.wrap{width:min(1120px,92%);margin:auto}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:5;background:#080817ed;backdrop-filter:blur(10px);border-bottom:1px solid #ffffff16}nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0}.brand{font-weight:900;letter-spacing:1.5px}.brand span{color:var(--cyan);text-shadow:0 0 12px #00eaff55}.links{display:flex;gap:17px;color:#dedff3;font-size:.92rem}.links a:hover{color:var(--pink)}.hero{text-align:center;padding:70px 0 52px}.kicker,.eyebrow{color:var(--cyan);font-size:.75rem;font-weight:800;letter-spacing:4px}.hero h1{font-size:clamp(3rem,8vw,6rem);line-height:.95;margin:18px 0;background:linear-gradient(100deg,var(--cyan),#8c83ff 48%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:620px;margin:0 auto 24px;color:var(--muted);line-height:1.7}.btn{display:inline-block;padding:12px 18px;border:1px solid var(--cyan);border-radius:8px;background:#00eaff12;color:#fff;font-weight:800;cursor:pointer}section{padding:34px 0 50px}h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:10px 0 22px}.eyebrow{color:var(--pink)}.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}.tools input,.tools select{background:#11142a;color:#fff;border:1px solid #343657;border-radius:8px;padding:12px}.tools input{flex:1;min-width:200px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{background:linear-gradient(150deg,#171a35,#0c0d20);border:1px solid #2c3052;border-radius:15px;overflow:hidden;transition:.2s}.card:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 10px 30px #00eaff12}.cover{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-bottom:1px solid #ffffff12}.body{padding:17px}.tag{font-size:.7rem;color:var(--cyan);border:1px solid #00eaff55;border-radius:30px;padding:4px 8px}.body h3{margin:12px 0 7px}.desc{color:var(--muted);font-size:.9rem;line-height:1.5;min-height:38px}.price-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:16px 0 13px}.price{font-size:1.15rem;font-weight:900}.wp{display:block;text-align:center;padding:11px 12px;border-radius:8px;background:#20c763;color:#062b14;font-weight:900}.wp:hover{background:#48e782}.notice{border:1px solid #6a4ca3;background:#18112c;border-radius:12px;padding:15px;color:#ded8ff;line-height:1.6;margin-top:20px}.info{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{padding:22px;border:1px solid #303354;background:#111329;border-radius:14px}.panel p{color:var(--muted);line-height:1.7}footer{border-top:1px solid #ffffff16;padding:25px 0;text-align:center;color:#8f94b4;font-size:.9rem}@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.links{gap:10px;font-size:.8rem}.info{grid-template-columns:1fr}}@media(max-width:480px){.grid{grid-template-columns:1fr}nav{align-items:flex-start;flex-direction:column}.hero{padding-top:48px}}
+
+.pc-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.pc-form label{display:flex;flex-direction:column;gap:7px;color:#dfe2ff;font-weight:700;font-size:.92rem}.pc-form select{width:100%;background:#11142a;color:#fff;border:1px solid #343657;border-radius:8px;padding:12px}.pc-result{margin-top:22px;display:grid;gap:12px}.result-card{border:1px solid #303354;background:#111329;border-radius:12px;padding:16px}.result-card h4{margin:0 0 8px;color:var(--cyan)}.result-card p{margin:5px 0;color:var(--muted);line-height:1.5}.result-status{font-weight:900}.status-good{color:#48e782}.status-mid{color:#ffd166}.status-low{color:#ff8292}.pc-small{color:var(--muted);font-size:.88rem;line-height:1.6}@media(max-width:600px){.pc-form{grid-template-columns:1fr}}
+
+/* NEON AI Assistant */
+.ai-launch{position:fixed;right:22px;bottom:22px;z-index:1000;border:0;border-radius:999px;padding:14px 19px;background:linear-gradient(110deg,var(--cyan),#9d5cff,var(--pink));color:#070716;font-weight:800;box-shadow:0 8px 35px #00eaff44;cursor:pointer}
+.ai-box{position:fixed;right:22px;bottom:86px;width:min(390px,calc(100vw - 28px));height:min(590px,calc(100vh - 120px));z-index:1000;display:none;flex-direction:column;border:1px solid #00eaff88;border-radius:18px;overflow:hidden;background:#0b0b20;box-shadow:0 16px 60px #000a}
+.ai-box.open{display:flex}.ai-head{padding:15px;background:linear-gradient(110deg,#102e49,#30113b);display:flex;align-items:center;justify-content:space-between;gap:10px}.ai-head strong{display:block}.ai-head small{color:#b9bfd9}.ai-close{background:transparent;color:white;border:0;font-size:23px;cursor:pointer}.ai-messages{padding:13px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:10px}.ai-msg{padding:10px 12px;border-radius:13px;max-width:90%;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}.ai-msg.bot{background:#191a36;border:1px solid #34345b;align-self:flex-start}.ai-msg.user{background:#063d4a;border:1px solid #087f91;align-self:flex-end}.ai-quick{padding:0 12px 10px;display:flex;flex-wrap:wrap;gap:6px}.ai-quick button{background:#14142b;border:1px solid #48486d;color:#dffaff;border-radius:999px;padding:7px 9px;font-size:12px;cursor:pointer}.ai-compose{display:flex;gap:8px;padding:11px;border-top:1px solid #292947}.ai-compose input{min-width:0;flex:1;background:#111127;color:white;border:1px solid #424263;border-radius:10px;padding:12px}.ai-compose button{border:0;border-radius:10px;padding:0 14px;background:var(--cyan);font-weight:800;cursor:pointer;color:#06101a}.ai-note{font-size:11px;color:#8f94b5;padding:0 12px 9px}.ai-msg a{color:var(--cyan)}
+
+
+/* Hamburger navigation menu */
+.site-nav{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:18px}
+.menu-toggle{width:46px;height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid #00eaff66;border-radius:12px;background:#111329;color:var(--text);cursor:pointer;box-shadow:0 0 18px #00eaff12;flex-shrink:0}
+.menu-toggle span{display:block;width:22px;height:2px;border-radius:3px;background:var(--cyan);transition:transform .2s,opacity .2s}
+.menu-toggle[aria-expanded="true"] span:first-child{transform:translateY(7px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] span:last-child{transform:translateY(-7px) rotate(-45deg)}
+.links{position:absolute;left:0;right:auto;top:calc(100% + 10px);display:none;flex-direction:column;gap:0;min-width:230px;padding:8px;border:1px solid #00eaff55;border-radius:16px;background:#0c0d22f7;box-shadow:0 18px 45px #0009,0 0 25px #00eaff12;backdrop-filter:blur(16px);z-index:20}
+.links.open{display:flex}
+.links a{padding:13px 14px;border-radius:10px;color:#dedff3;font-size:.96rem;white-space:nowrap}
+.links a:hover,.links a:focus{background:#00eaff13;color:var(--cyan);outline:none}
+@media(min-width:760px){.links{min-width:250px}}
+@media(max-width:420px){.brand{font-size:.88rem;letter-spacing:.6px}.menu-toggle{width:42px;height:40px}.links{min-width:min(250px,88vw)}}
+
+/* Free software logo artwork */
+.software-logo{width:100%;height:150px;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at center,#202344 0%,#101126 72%);border-bottom:1px solid #ffffff18}
+.software-logo img{display:block;width:100%;height:100%;max-width:180px;object-fit:contain;filter:drop-shadow(0 4px 14px #0008)}
+.software-card .body h3{min-height:2.4em}
+
+/* NEON GAME HUB: hamburger menu positioned on the left */
+.menu-toggle, .hamburger, .menu-btn, #menuToggle, #hamburger,
+button[aria-label*="menu" i], button[aria-label*="Menu" i] {
+  left: 18px !important;
+  right: auto !important;
+}
+
+
+/* Center the search and category controls */
+.tools{justify-content:center;align-items:center}
+.tools input{flex:0 1 560px;max-width:100%}
+.tools select{flex:0 0 auto}
+.site-cover-art{display:block;width:100%;max-height:390px;object-fit:cover;object-position:center;border:1px solid #38305f;border-radius:18px;box-shadow:0 12px 40px #8b2cff35;margin:0 auto 22px}
+.hero{padding-top:38px}
+@media(max-width:600px){.tools input,.tools select{width:100%;flex:1 1 100%}.site-cover-art{max-height:230px}}
+
+/* Neon hover effect for menu options and interactive website items */
+.links a{
+  position:relative;
+  transition:background .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  border:1px solid transparent;
+}
+.links a:hover,.links a:focus-visible{
+  color:#fff !important;
+  background:linear-gradient(90deg,#ff2bd622,#00eaff22) !important;
+  border-color:#00eaffaa;
+  box-shadow:0 0 8px #00eaff88,0 0 18px #8b2cff88,inset 0 0 12px #00eaff22;
+  text-shadow:0 0 8px #00eaff,0 0 14px #ff2bd6;
+  transform:translateX(5px);
+  outline:none;
+}
+.btn,.wp,.menu-toggle,.ai-launch,.tools select,.tools input,.ai-quick button,
+button:not(.ai-close),.card{
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,filter .2s ease;
+}
+.btn:hover,.menu-toggle:hover,.ai-launch:hover,.ai-quick button:hover,
+button:not(.ai-close):hover{
+  box-shadow:0 0 10px #00eaff99,0 0 22px #ff2bd666;
+  filter:brightness(1.15);
+}
+.wp:hover{
+  box-shadow:0 0 12px #20c763aa,0 0 24px #20c76366;
+  transform:translateY(-2px);
+}
+.card:hover{
+  box-shadow:0 0 12px #00eaff66,0 0 26px #8b2cff44;
+}
+
+
+/* Game details + PC requirements modal */
+.game-card{cursor:pointer}
+.game-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.game-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:18px;background:#03030de8;backdrop-filter:blur(8px)}
+.game-modal.open{display:flex}
+.game-modal-panel{position:relative;width:min(720px,100%);max-height:min(88vh,850px);overflow:auto;border:1px solid #00eaff88;border-radius:18px;background:linear-gradient(145deg,#171833,#08091a);box-shadow:0 0 18px #00eaff44,0 0 50px #a12bff33;padding:22px}
+.game-modal-close{position:absolute;right:14px;top:12px;border:1px solid #ffffff33;background:#171833;color:white;border-radius:10px;width:38px;height:38px;font-size:23px;cursor:pointer}
+.game-modal-title{margin:0 45px 8px 0;color:#fff;font-size:clamp(1.35rem,4vw,2rem);text-shadow:0 0 12px #00eaff77}
+.game-modal-note{color:var(--muted);line-height:1.5;margin:0 0 18px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.spec-box{border:1px solid #00eaff44;border-radius:13px;background:#0b1024;padding:15px}
+.spec-box h4{margin:0 0 10px;color:var(--cyan)}
+.spec-box ul{margin:0;padding-left:19px;color:#e8eaff;line-height:1.75}
+.game-modal-order{display:block;text-align:center;margin-top:18px;padding:13px;border-radius:10px;background:#20c763;color:#052b14;font-weight:900;box-shadow:0 0 16px #20c76355}
+.game-modal-order:hover{box-shadow:0 0 12px #20c763,0 0 28px #20c76377}
+@media(max-width:560px){.spec-grid{grid-template-columns:1fr}.game-modal-panel{padding:17px}}
+
+.unavailable-label{display:block;text-align:center;margin-top:12px;padding:12px 10px;border:1px solid #ff526b;border-radius:10px;background:#451321;color:#ffdce2;font-weight:900;letter-spacing:1px;box-shadow:0 0 12px #ff365544}
+
+.view-requirements{display:block;width:100%;margin:12px 0 9px;padding:12px 10px;border:1px solid #00eaff;border-radius:10px;background:#101a35;color:#00eaff;font-weight:900;cursor:pointer;text-align:center}
+.view-requirements:hover{background:#12304a;box-shadow:0 0 12px #00eaff88}
+
+/* Game rating button */
+.card{position:relative}
+.game-rate-btn{position:absolute;top:10px;left:10px;z-index:4;border:1px solid #ffd166;border-radius:999px;background:#111329eF;color:#ffd166;padding:8px 11px;font-weight:900;font-size:13px;cursor:pointer;box-shadow:0 0 12px #ffd16655}
+.game-rate-btn:hover{background:#30233a;box-shadow:0 0 16px #ffd166aa}
+.rate-dialog{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:18px;background:#03030df0}
+.rate-panel{width:min(360px,100%);padding:22px;border:1px solid #ffd166;border-radius:16px;background:#12142b;text-align:center;box-shadow:0 0 25px #ffd16655}
+.rate-panel h3{color:#ffd166;margin:0 0 8px}
+.rate-stars{display:flex;justify-content:center;gap:7px;margin:18px 0}
+.rate-stars button{border:0;background:transparent;color:#65677c;font-size:32px;cursor:pointer;padding:2px}
+.rate-stars button:hover,.rate-stars button.selected{color:#ffd166;text-shadow:0 0 12px #ffd166}
+.rate-close{border:1px solid #777;background:#20233e;color:white;border-radius:8px;padding:8px 16px;cursor:pointer}
+.rate-note{color:#c6c9df;font-size:13px;line-height:1.5}
+
+
+
+.site-nav{gap:14px}
+
+
+/* NEON GAME HUB home appearance: cinematic cyber-store */
+.home-hero{width:min(1280px,94%);margin:24px auto 18px;min-height:560px;padding:clamp(24px,4vw,58px);display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:clamp(18px,3vw,42px);position:relative;overflow:hidden;border:1px solid #29294b;border-radius:8px 34px 8px 34px;background:linear-gradient(125deg,#070913 0%,#0a1022 50%,#130a25 100%);box-shadow:0 20px 60px #0008}
+.home-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#00eaff0b 1px,transparent 1px),linear-gradient(#00eaff08 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(90deg,#000,transparent 95%);pointer-events:none}
+.home-hero:after{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(#00eaff,#8d5bff,#ff2bd6);box-shadow:0 0 24px #00eaff77}
+.hero-copy{position:relative;z-index:1}.hero-pill{display:inline-flex;align-items:center;gap:9px;border:1px solid #00eaff55;background:#071d2b;border-radius:4px;padding:9px 12px;color:#a8f8ff;font-size:.68rem;font-weight:900;letter-spacing:2px}.live-dot{width:7px;height:7px;border-radius:50%;background:#45f5b2;box-shadow:0 0 12px #45f5b2}.hero-mini{margin:28px 0 8px;color:#a5aec9;font-size:.75rem;font-weight:800;letter-spacing:5px}.home-hero h1{font-size:clamp(2.8rem,5.8vw,5.4rem);line-height:.92;letter-spacing:-2.5px;margin:8px 0 20px;color:#fff;text-shadow:0 0 28px #00eaff22}.home-hero h1 span{display:block;background:linear-gradient(90deg,#00eaff,#8a7bff 58%,#ff55d8);-webkit-background-clip:text;background-clip:text;color:transparent}.hero-lead{max-width:470px;color:#b6bfd7;line-height:1.8;font-size:1rem}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 32px}.hero-primary,.hero-secondary{padding:14px 19px;border-radius:4px;font-size:.78rem;font-weight:900;letter-spacing:1px;transition:.2s}.hero-primary{background:linear-gradient(90deg,#00dff2,#8b79ff);color:#07101c;box-shadow:0 8px 25px #00eaff24}.hero-primary:hover{transform:translateY(-2px);box-shadow:0 0 28px #00eaff66}.hero-primary span{padding-left:12px}.hero-secondary{border:1px solid #4d4d77;background:#111328;color:#f4edff}.hero-secondary:hover{border-color:#ff2bd6;color:#ff9deb;box-shadow:0 0 20px #ff2bd622}.hero-stats{display:flex;align-items:center;gap:22px}.hero-stats div{display:grid;gap:4px}.hero-stats b{font-size:1.2rem;color:#fff}.hero-stats small{font-size:.62rem;letter-spacing:1.5px;color:#8993b5}.hero-stats i{height:32px;width:1px;background:#ffffff20}.hero-art{position:relative;z-index:1;min-width:0}.hero-art img{width:100%;height:clamp(260px,31vw,390px);object-fit:cover;border-radius:5px 25px 5px 25px;border:1px solid #4b4c75;box-shadow:0 18px 48px #000b,0 0 35px #7254ff22}.art-glow{position:absolute;inset:10% 6%;background:#794cff;filter:blur(65px);opacity:.17}.art-caption{position:absolute;left:14px;right:14px;bottom:13px;padding:12px 15px;border-radius:4px;background:#060915e8;display:grid;gap:5px;border:1px solid #ffffff20}.art-caption span{font-size:.65rem;color:#00eaff;letter-spacing:2px;font-weight:900}.art-caption b{font-size:.8rem;color:#fff;letter-spacing:1px}.floating-chip{position:absolute;right:-8px;top:15px;padding:10px 14px;border-radius:4px;background:#ff2bd6;color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 0 25px #ff2bd666;transform:rotate(3deg)}.home-shortcuts{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;width:min(1280px,94%);margin:0 auto 34px}.home-shortcuts a{display:flex;align-items:center;gap:12px;padding:17px 16px;border:1px solid #262b48;border-radius:5px;background:linear-gradient(140deg,#11172a,#090b17);transition:.2s;position:relative;overflow:hidden}.home-shortcuts a:before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:#00eaff;opacity:0;transition:.2s}.home-shortcuts a:hover{border-color:#00eaff66;transform:translateY(-3px);box-shadow:0 9px 25px #00eaff12}.home-shortcuts a:hover:before{opacity:1}.home-shortcuts a>span{font-size:1.45rem}.home-shortcuts a div{display:grid;gap:4px;min-width:0}.home-shortcuts b{font-size:.85rem}.home-shortcuts small{font-size:.7rem;color:#9ca5c6}.home-shortcuts strong{margin-left:auto;color:#00eaff}@media(max-width:820px){.home-hero{grid-template-columns:1fr;padding:32px 25px;min-height:auto}.hero-art img{height:260px}.home-shortcuts{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.home-hero{margin-top:18px;padding:25px 18px}.hero-stats{gap:13px}.hero-art img{height:210px}.home-shortcuts{gap:8px}.home-shortcuts a{padding:11px;gap:8px}.home-shortcuts small{font-size:.64rem}}
+
+/* Full-screen cinematic home — selected visual direction 3 */
+.home-hero.cinematic-home{width:100%;min-height:calc(100vh - 76px);margin:0; padding:clamp(34px,7vw,100px) max(5vw,calc((100vw - 1280px)/2));display:flex;align-items:center;position:relative;overflow:hidden;border:0;border-radius:0;background:#050611 url('images/neon-game-hub-cover.jpg') center 42%/cover no-repeat;box-shadow:none}
+.home-hero.cinematic-home:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,5,16,.97) 0%,rgba(4,5,18,.86) 37%,rgba(5,6,20,.35) 72%,rgba(5,6,20,.2) 100%),linear-gradient(0deg,#070817 0%,transparent 30%,rgba(4,5,16,.15) 100%);mask-image:none}
+.home-hero.cinematic-home:after{content:"";position:absolute;left:0;top:18%;width:3px;height:64%;background:linear-gradient(transparent,var(--cyan),var(--pink),transparent);box-shadow:0 0 25px #00eaff99}
+.cinematic-copy{max-width:720px;position:relative;z-index:1;padding:28px 0 55px}
+.cinematic-home .hero-pill{background:#071522c9;backdrop-filter:blur(8px);border-radius:30px}
+.cinematic-home .hero-mini{margin:30px 0 12px;letter-spacing:6px;color:#d4d9f0}
+.cinematic-home h1{font-size:clamp(3.5rem,9vw,8rem);line-height:.88;letter-spacing:-4px;margin:12px 0 26px;text-shadow:0 5px 35px #000;color:#fff}
+.cinematic-home h1 span{display:block;background:linear-gradient(90deg,#fff 0%,#00eaff 45%,#ff35d5 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cinematic-home .hero-lead{max-width:560px;font-size:clamp(1rem,1.5vw,1.2rem);color:#e0e5f8;text-shadow:0 2px 12px #000;line-height:1.75}
+.cinematic-home .hero-actions{margin:30px 0 24px}
+.cinematic-home .hero-primary,.cinematic-home .hero-secondary{padding:16px 23px;border-radius:5px}
+.cinematic-home .hero-secondary{background:#080b1dcc;backdrop-filter:blur(8px)}
+.cinematic-note{display:flex;align-items:center;gap:12px;color:#b8c2dc;font-size:.72rem;font-weight:800;letter-spacing:2px}
+.cinematic-note span{width:34px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.scroll-cue{position:absolute;z-index:2;bottom:28px;left: max(5vw,calc((100vw - 1280px)/2));display:flex;align-items:center;gap:12px;color:#c7cce0;font-size:.65rem;font-weight:800;letter-spacing:2px}
+.scroll-cue span{display:grid;place-items:center;width:30px;height:30px;border:1px solid #00eaff88;border-radius:50%;color:var(--cyan);font-size:1rem;animation:scrollPulse 1.8s infinite}
+.cinematic-index{position:absolute;right:max(5vw,calc((100vw - 1280px)/2));bottom:34px;z-index:2;color:#d6d9ed;font-size:.65rem;letter-spacing:2px}.cinematic-index i{display:inline-block;width:34px;height:1px;background:#00eaff;margin:0 10px;vertical-align:middle}
+@keyframes scrollPulse{0%,100%{transform:translateY(0);box-shadow:0 0 0 #00eaff00}50%{transform:translateY(5px);box-shadow:0 0 16px #00eaff66}}
+.home-shortcuts{margin-top:24px}
+@media(max-width:760px){.home-hero.cinematic-home{min-height:calc(100svh - 120px);padding:35px 7vw;background-position:58% center}.home-hero.cinematic-home:before{background:linear-gradient(90deg,rgba(3,5,16,.94),rgba(4,5,18,.68)),linear-gradient(0deg,#070817 0%,transparent 35%)}.cinematic-home h1{font-size:clamp(3.3rem,14vw,5.6rem);letter-spacing:-2px}.cinematic-copy{padding:10px 0 55px}.cinematic-index{display:none}.scroll-cue{left:7vw}}
+@media(prefers-reduced-motion:reduce){.scroll-cue span{animation:none}}
+
+</style>
+<style id="home-3d-overrides">
+.home-3d{isolation:isolate;min-height:calc(100vh - 76px);background:#050611 url('images/neon-game-hub-cover.jpg') center/cover no-repeat!important;perspective:1200px;padding-right:clamp(24px,7vw,110px)!important}
+.home-3d:before{z-index:-2!important;background:linear-gradient(90deg,rgba(3,4,17,.97),rgba(4,5,22,.83) 48%,rgba(4,5,20,.45)),linear-gradient(0deg,#070817,transparent 40%)!important}
+.home-3d:after{z-index:-1;content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 48%,#00eaff25,transparent 27%),radial-gradient(circle at 88% 30%,#ff2bd622,transparent 25%);pointer-events:none}
+.three-grid{position:absolute;inset:0;z-index:-1;opacity:.18;background-image:linear-gradient(#00eaff2b 1px,transparent 1px),linear-gradient(90deg,#00eaff2b 1px,transparent 1px);background-size:54px 54px;transform:perspective(500px) rotateX(58deg) scale(1.7);transform-origin:bottom;mask-image:linear-gradient(transparent 5%,black 100%)}
+.home-3d .cinematic-copy{max-width:650px;z-index:2}.home-3d h1{filter:drop-shadow(0 12px 22px #000);letter-spacing:-5px}.home-3d .hero-pill{border:1px solid #00eaff77;box-shadow:0 0 24px #00eaff20,inset 0 0 18px #00eaff10}.home-3d .hero-primary,.home-3d .hero-secondary{border-radius:5px;transition:transform .25s,box-shadow .25s}.home-3d .hero-primary:hover,.home-3d .hero-secondary:hover{transform:translateY(-5px) perspective(500px) rotateX(7deg);box-shadow:0 12px 30px #00eaff35}
+.hero-3d-panel{position:absolute;z-index:1;right:9%;top:50%;width:min(34vw,420px);aspect-ratio: .78;transform:translateY(-50%) rotateY(-16deg) rotateX(5deg);border:1px solid #00eaff99;border-radius:18px;background:linear-gradient(145deg,#111b36d9,#090b1bdc 60%,#211039d9);box-shadow:0 35px 80px #000a,0 0 45px #00eaff25,inset 0 0 35px #00eaff10;backdrop-filter:blur(10px);overflow:hidden;animation:panel-float 6s ease-in-out infinite}
+.hero-3d-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 25%,#ffffff14 42%,transparent 58%);transform:translateX(-100%);animation:panel-shine 7s ease-in-out infinite}
+.panel-top,.panel-bottom{position:absolute;left:22px;right:22px;display:flex;justify-content:space-between;z-index:2}.panel-top{top:20px;font-size:10px;letter-spacing:2px;color:#b9faff}.panel-top i{font-style:normal;color:#67ffbd}.panel-bottom{bottom:22px;align-items:end}.panel-bottom b{font-size:clamp(20px,3vw,34px);line-height:.95;color:#fff;text-shadow:0 0 20px #00eaff88}.panel-bottom small{font-size:8px;letter-spacing:2px;color:#9defff}.holo-ring{position:absolute;left:50%;top:48%;border:1px solid #00eaffaa;border-radius:50%;transform:translate(-50%,-50%) rotateX(65deg);box-shadow:0 0 22px #00eaff55,inset 0 0 18px #00eaff33}.ring-a{width:75%;aspect-ratio:1;animation:ring-spin 14s linear infinite}.ring-b{width:57%;aspect-ratio:1;border-color:#ff42db;transform:translate(-50%,-50%) rotateY(65deg);animation:ring-spin 11s linear infinite reverse}.holo-core{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);text-align:center;line-height:1.05;font-size:clamp(22px,3.2vw,36px);font-weight:1000;letter-spacing:1px;color:#fff;text-shadow:0 0 8px #fff,0 0 25px #00eaff,0 0 55px #00eaff;animation:core-pulse 3s ease-in-out infinite;width:90%}.neon-orb{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}.orb-one{width:13px;height:13px;right:12%;top:22%;background:#00eaff;box-shadow:0 0 25px 10px #00eaff77;animation:orb-drift 7s ease-in-out infinite}.orb-two{width:9px;height:9px;right:43%;bottom:20%;background:#ff2bd6;box-shadow:0 0 24px 9px #ff2bd677;animation:orb-drift 9s ease-in-out infinite reverse}
+.home-shortcuts a{border-radius:12px;transform-style:preserve-3d;transition:transform .3s,border-color .3s,box-shadow .3s}.home-shortcuts a:hover{transform:translateY(-8px) perspective(700px) rotateX(5deg) rotateY(-4deg);box-shadow:0 18px 35px #00eaff20,0 0 0 1px #00eaff55}
+@keyframes panel-float{0%,100%{margin-top:0}50%{margin-top:-15px}}@keyframes panel-shine{0%,55%,100%{transform:translateX(-100%)}75%{transform:translateX(100%)}}@keyframes ring-spin{to{rotate:360deg}}@keyframes core-pulse{50%{text-shadow:0 0 14px #fff,0 0 38px #00eaff,0 0 75px #ff2bd6}}@keyframes orb-drift{50%{translate:0 -28px}}
+@media(max-width:850px){.hero-3d-panel{right:4%;width:34vw;opacity:.65}.home-3d .cinematic-copy{max-width:58%}}@media(max-width:620px){.home-3d{min-height:760px;align-items:flex-start;padding-top:70px!important}.home-3d .cinematic-copy{max-width:100%;padding-bottom:250px}.hero-3d-panel{width:210px;right:calc(50% - 105px);top:auto;bottom:35px;transform:rotateY(-10deg) rotateX(4deg)}.home-3d h1{letter-spacing:-2px}.three-grid{background-size:38px 38px}.home-shortcuts{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){.hero-3d-panel,.holo-ring,.holo-core,.neon-orb{animation:none!important}.home-shortcuts a,.home-3d .hero-primary{transition:none}}
+</style>
+
+<style id="full-page-bg">
+html, body {
+  background: transparent !important;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background:
+    linear-gradient(180deg, rgba(6, 7, 20, 0.72) 0%, rgba(8, 9, 25, 0.80) 50%, rgba(5, 6, 17, 0.86) 100%),
+    url('images/neon-game-hub-cover.jpg') center center / cover no-repeat;
+  pointer-events: none;
+}
+section.wrap, section.home-shortcuts, footer {
+  position: relative;
+  z-index: 1;
+}
+</style>
+
+</head><body><header><div class="wrap"><nav class="site-nav"><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-links"><span></span><span></span><span></span></button><a class="brand" href="#home">⚡ <span>NEON</span> GAME HUB</a><div class="links" id="site-links"><a href="#games">🎮 Games</a><a href="#software">💻 Free Software</a><a href="#pc-checker">🖥️ PC Checker</a><a href="#order">🛒 How to Order</a><a href="#contact">📞 Contact</a><a href="#ai-launch" id="menu-ai-link">🤖 NEON AI</a></div></nav></div></header>
+<section class="home-hero cinematic-home home-3d" id="home">
+  <div class="three-grid"></div><div class="neon-orb orb-one"></div><div class="neon-orb orb-two"></div>
+  <div class="hero-copy cinematic-copy">
+    <div class="hero-pill"><span class="live-dot"></span> LEVEL UP YOUR PLAY</div>
+    <p class="hero-mini">WELCOME TO THE NEXT DIMENSION</p>
+    <h1>NEON <span>GAME HUB</span></h1>
+    <p class="hero-lead">Your gaming universe. Discover games, explore free PC software and check what runs on your setup.</p>
+    <div class="hero-actions"><a class="hero-primary" href="#games">ENTER GAME STORE <span>↗</span></a><a class="hero-secondary" href="#software">EXPLORE SOFTWARE</a></div>
+    <div class="cinematic-note"><span></span> GAMES&nbsp; · &nbsp;SOFTWARE&nbsp; · &nbsp;PC TOOLS</div>
+  </div>
+  <div class="hero-3d-panel" aria-hidden="true"><div class="panel-top"><span>NEON // SYSTEM</span><i>● ONLINE</i></div><div class="holo-ring ring-a"></div><div class="holo-ring ring-b"></div><div class="holo-core">NEON<br>GAME HUB</div><div class="panel-bottom"><b>GAMING<br>REDEFINED</b><small>PLAY · DISCOVER · ENJOY</small></div></div>
+  <a class="scroll-cue" href="#games" aria-label="Scroll to games"><span>↓</span> SCROLL TO EXPLORE</a>
+  <div class="cinematic-index">NEON GAME HUB <i></i> FUTURE IS PLAY</div>
+</section>
+<section class="home-shortcuts wrap" aria-label="Explore NEON GAME HUB"><a href="#games"><span>🎮</span><div><b>Game Store</b><small>Find your next game</small></div><strong>↗</strong></a><a href="#software"><span>💻</span><div><b>Free Software</b><small>Useful PC downloads</small></div><strong>↗</strong></a><a href="#pc-checker"><span>🖥️</span><div><b>PC Checker</b><small>Check compatibility</small></div><strong>↗</strong></a><a href="#ai-launch"><span>🤖</span><div><b>NEON AI</b><small>Ask the assistant</small></div><strong>↗</strong></a></section>
+<main><section class="wrap" id="games"><div class="eyebrow">THE COLLECTION</div><h2>Available Games</h2><div class="tools"><input id="search" type="search" placeholder="Search games..."><select id="category"><option value="all">All categories</option><option>Action</option><option>Adventure</option><option>Racing</option><option>Simulation</option></select></div><div class="grid" id="grid"><article class="card" data-name="GTA V" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg" alt="GTA V cover art"><div class="body"><span class="tag">ACTION</span><h3>GTA V</h3><p class="desc">Open-world action game listing.</p><div class="price-row"><span class="price">LKR 4,095</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="GTA V" data-price="LKR 4,095">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Minecraft" data-cat="Adventure"><img class="cover" src="images/minecraft-user.jpg" alt="Minecraft cover art"><div class="body"><span class="tag">ADVENTURE</span><h3>Minecraft</h3><p class="desc">Sandbox building and exploration game listing.</p><div class="price-row"><span class="price">LKR 2,500</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Minecraft" data-price="LKR 2,500">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Euro Truck Simulator 2" data-cat="Simulation"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg" alt="Euro Truck Simulator 2 cover art"><div class="body"><span class="tag">SIMULATION</span><h3>Euro Truck Simulator 2</h3><p class="desc">Long-haul trucking simulation game listing.</p><div class="price-row"><span class="price">LKR 700</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Euro Truck Simulator 2" data-price="LKR 700">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Need for Speed: Most Wanted 2005" data-cat="Racing"><img class="cover" src="https://images.launchbox-app.com/1ca80c9b-5ade-4655-93c4-3dab49b0e0e7.jpg" alt="Need for Speed: Most Wanted (2005) original cover art"><div class="body"><span class="tag">RACING</span><h3>Need for Speed: Most Wanted (2005)</h3><p class="desc">Street racing game listing.</p><div class="price-row"><span class="price">LKR 500</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Need for Speed: Most Wanted" data-price="LKR 500">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Assassin's Creed Origins" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/582160/header.jpg" alt="Assassin's Creed Origins cover art"><div class="body"><span class="tag">ACTION</span><h3>Assassin's Creed Origins</h3><p class="desc">Historical action-adventure game listing.</p><div class="price-row"><span class="price">LKR 3,599.50</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Assassin's Creed Origins" data-price="LKR 3,599.50">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Assassin's Creed IV: Black Flag" data-cat="Adventure"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/242050/header.jpg" alt="Assassin's Creed IV: Black Flag cover art"><div class="body"><span class="tag">ADVENTURE</span><h3>Assassin's Creed IV: Black Flag</h3><p class="desc">Pirate-themed action-adventure game listing.</p><div class="price-row"><span class="price">LKR 1,349.50</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Assassin's Creed IV: Black Flag" data-price="LKR 1,349.50">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Far Cry 1" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/13520/header.jpg" alt="Far Cry (2004) official game artwork"><div class="body"><span class="tag">ACTION</span><h3>Far Cry 1</h3><p class="desc">Classic tropical island action-adventure game.</p><div class="price-row"><span class="price">LKR 1,399.50</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Far Cry 1" data-price="LKR 1,399.50">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Prince of Persia: The Forgotten Sands" data-cat="Adventure"><img class="cover" src="https://images.launchbox-app.com/1cab87aa-5ff4-4d61-ba5b-626f25a0ec58.jpg" alt="Prince of Persia: The Forgotten Sands original PC cover art"><div class="body"><span class="tag">ADVENTURE</span><h3>Prince of Persia: The Forgotten Sands</h3><p class="desc">Action-adventure game listing.</p><div class="price-row"><span class="price">LKR 849.50</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Prince of Persia: The Forgotten Sands" data-price="LKR 849.50">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Crysis 2" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/108800/header.jpg" alt="Crysis 2 game artwork"><div class="body"><span class="tag">ACTION / FPS</span><h3>Crysis 2</h3><p class="desc">Sci-fi first-person shooter game listing.</p><div class="price-row"><span class="price">LKR 1,925</span></div><div class="unavailable-label" aria-label="Crysis 2 not available">⛔ NOT AVAILABLE</div></div></article><article class="card" data-name="Call of Duty 1" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/2620/header.jpg" alt="Call of Duty (2003) cover art"><div class="body"><span class="tag">ACTION / FPS</span><h3>Call of Duty 1</h3><p class="desc">Classic World War II first-person shooter.</p><div class="price-row"><span class="price">LKR 1,250</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Call of Duty 1" data-price="LKR 1,250">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Call of Duty 2" data-cat="Action"><img class="cover" src="https://cdn.akamai.steamstatic.com/steam/apps/2630/header.jpg" alt="Call of Duty 2 cover art"><div class="body"><span class="tag">ACTION / FPS</span><h3>Call of Duty 2</h3><p class="desc">World War II first-person shooter sequel.</p><div class="price-row"><span class="price">LKR 1,400</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="Call of Duty 2" data-price="LKR 1,400">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="Project IGI" data-cat="Action"><img class="cover" src="images/project-igi-custom.jpg" alt="Original custom Project IGI-inspired cover art"><div class="body"><span class="tag">ACTION / FPS</span><h3>IGI 1</h3><p class="desc">Classic tactical first-person shooter.</p><div class="price-row"><span class="price">LKR 300</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="IGI 1" data-price="LKR 300">🟢 Order on WhatsApp</a></div></article><article class="card" data-name="IGI 2" data-cat="Action"><img class="cover" src="images/igi-2-custom.jpg" alt="Original custom IGI 2 Covert Strike-inspired cover art"><div class="body"><span class="tag">ACTION / FPS</span><h3>IGI 2</h3><p class="desc">Tactical stealth-action shooter sequel.</p><div class="price-row"><span class="price">LKR 350</span></div><button class="view-requirements" type="button">💻 View PC Requirements</button><a class="wp order" href="#" data-game="IGI 2" data-price="LKR 350">🟢 Order on WhatsApp</a></div></article></div><p id="empty" style="display:none;color:var(--muted)">No games found.</p><div class="notice">ℹ️ Prices are shown in Sri Lankan Rupees (LKR). Game artwork is loaded from external image sources and requires an internet connection. Artwork belongs to its respective owners. Only sell games you are authorised to distribute.</div></section>
+
+<section class="wrap" id="software"><div class="eyebrow">FREE SOFTWARE</div><h2>Free Software Downloads</h2><p class="pc-small">Download free tools from their official websites. NEON GAME HUB links to the publishers' official download pages; each site's terms and system requirements apply.</p><div class="tools"><input id="software-search" type="search" placeholder="Search free software..."><select id="software-category"><option value="all">All software categories</option><option value="Development">Development</option><option value="Streaming">Streaming</option><option value="Compression">Compression</option><option value="3D Design">3D Design</option><option value="Image Editing">Image Editing</option><option value="Media Player">Media Player</option></select></div><div class="grid" id="software-grid">
+<article class="card software-card" data-name="Visual Studio Code VS Code" data-cat="Development"><div class="software-logo"><img src="images/vscode.svg" alt="Visual Studio Code official brand logo" loading="lazy"></div><div class="body"><span class="tag">DEVELOPMENT</span><h3>Visual Studio Code</h3><p class="desc">Free source-code editor for programming and web development.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://code.visualstudio.com/Download" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="OBS Studio screen recording streaming" data-cat="Streaming"><div class="software-logo"><img src="https://cdn.simpleicons.org/obsstudio/FFFFFF" alt="OBS Studio logo" loading="lazy"></div><div class="body"><span class="tag">STREAMING</span><h3>OBS Studio</h3><p class="desc">Record your screen and stream gameplay.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://obsproject.com/download" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="7-Zip zip archive file compression" data-cat="Compression"><div class="software-logo"><img src="https://cdn.simpleicons.org/7zip/FFFFFF" alt="7-Zip logo" loading="lazy"></div><div class="body"><span class="tag">COMPRESSION</span><h3>7-Zip</h3><p class="desc">Create and extract compressed archive files.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://www.7-zip.org/" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="WinRAR RAR ZIP archive compression" data-cat="Compression"><div class="software-logo"><img src="images/winrar.svg" alt="WinRAR archive icon" loading="lazy"></div><div class="body"><span class="tag">COMPRESSION</span><h3>WinRAR</h3><p class="desc">Create and extract RAR and ZIP archives. Free trial; a licence may be required for continued use.</p><div class="price-row"><span class="price">FREE TRIAL</span></div><a class="wp" href="https://www.win-rar.com/download.html" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="Blender 3D modeling animation" data-cat="3D Design"><div class="software-logo"><img src="https://cdn.simpleicons.org/blender/F5792A" alt="Blender logo" loading="lazy"></div><div class="body"><span class="tag">3D DESIGN</span><h3>Blender</h3><p class="desc">3D modelling, animation, rendering and creative tools.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://www.blender.org/download/" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="GIMP image photo editing" data-cat="Image Editing"><div class="software-logo"><img src="https://cdn.simpleicons.org/gimp/5C5543" alt="GIMP logo" loading="lazy"></div><div class="body"><span class="tag">IMAGE EDITING</span><h3>GIMP</h3><p class="desc">Free image editing and graphic design application.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://www.gimp.org/downloads/" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+<article class="card software-card" data-name="VLC Media Player video audio media" data-cat="Media Player"><div class="software-logo"><img src="https://cdn.simpleicons.org/vlcmediaplayer/FF8800" alt="VLC media player logo" loading="lazy"></div><div class="body"><span class="tag">MEDIA PLAYER</span><h3>VLC Media Player</h3><p class="desc">Play many common video and audio formats.</p><div class="price-row"><span class="price">FREE</span></div><a class="wp" href="https://www.videolan.org/vlc/" target="_blank" rel="noopener noreferrer">⬇️ Official Download</a></div></article>
+</div><p id="software-empty" class="pc-small" style="display:none">No software found.</p><div class="notice">🔐 Safety tip: download only from official publisher websites. Avoid cracked or modified installers, and review the installer options before clicking through.</div></section>
+
+<section class="wrap" id="pc-checker"><div class="eyebrow">PC COMPATIBILITY</div><h2>Can My PC Run This Game?</h2><p class="pc-small">Enter your PC specs to get a rough compatibility estimate for the games in NEON GAME HUB. This checker does not scan your computer automatically; results are estimates based on broad hardware categories, not a guarantee of performance.</p><div class="panel"><div class="pc-form"><label>Processor (CPU)<select id="pc-cpu"><option value="1">Older / entry-level dual-core</option><option value="2" selected>Intel Core i3 / AMD Ryzen 3 (basic)</option><option value="3">Intel Core i5 / AMD Ryzen 5</option><option value="4">Intel Core i7 / AMD Ryzen 7 or better</option></select></label><label>Graphics (GPU)<select id="pc-gpu"><option value="0">Integrated graphics (older Intel HD)</option><option value="1" selected>Modern integrated graphics / entry GPU</option><option value="2">GTX 750 Ti / GTX 950 / similar</option><option value="3">GTX 1050 Ti / GTX 1650 / RX 570</option><option value="4">GTX 1660 / RTX 2060 / RX 6600 or better</option></select></label><label>Installed RAM<select id="pc-ram"><option value="2">2 GB</option><option value="4">4 GB</option><option value="8" selected>8 GB</option><option value="16">16 GB</option><option value="32">32 GB or more</option></select></label><label>Free storage<select id="pc-storage"><option value="10">Less than 20 GB</option><option value="40">20–49 GB</option><option value="80" selected>50–99 GB</option><option value="150">100 GB or more</option></select></label><label>Windows version<select id="pc-windows"><option value="7">Windows 7 or older</option><option value="10" selected>Windows 10</option><option value="11">Windows 11</option></select></label><label>Preferred result<select id="pc-mode"><option value="minimum" selected>Can it run? (minimum settings)</option><option value="smooth">Aim for smoother gameplay</option></select></label></div><button class="btn" id="pc-check" type="button" style="margin-top:18px">🔎 Check My PC</button><div id="pc-results" class="pc-result" aria-live="polite"></div></div><p class="pc-small">Note: Game requirements can vary by edition, updates, resolution and settings. Minecraft Java Edition with shaders/mods may need much stronger hardware. Always check the publisher's official requirements before buying.</p></section>
+<section class="wrap" id="order"><div class="eyebrow">EASY ORDERING</div><h2>How to Order</h2><div class="info"><div class="panel"><h3>🎮 1. Choose a game</h3><p>Check the game image, title and price.</p></div><div class="panel"><h3>🟢 2. Tap WhatsApp</h3><p>The button opens WhatsApp with the game's name and listed price in a pre-filled message.</p></div></div></section><section class="wrap" id="contact"><div class="eyebrow">CONTACT</div><h2>NEON GAME HUB</h2><div class="panel"><p>WhatsApp orders: tap a game’s green order button to message NEON GAME HUB.</p><a class="btn" href="#games">Choose a Game</a></div></section></main><footer>© 2026 NEON GAME HUB · Game Store</footer>
+
+
+ <div class="ai-quick"><button data-prompt="Show me all game prices">💰 Game prices</button><button data-prompt="Recommend a game for me">🎮 Recommend a game</button><button data-prompt="How do I check if my PC can run a game?">💻 PC checker</button><button data-prompt="How do I order on WhatsApp?">🛒 How to order</button></div>
+ <form class="ai-compose" id="ai-form"><input id="ai-input" autocomplete="off" maxlength="500" placeholder="Type your question…" aria-label="Your message"><button type="submit">Send</button></form>
+ <div class="ai-note">Preview assistant: live ChatGPT-level answers need a secure AI backend/API connection.</div>
+</section>
+
+<script>
+const WHATSAPP_NUMBER="94726773706"; // WhatsApp number in international format, digits only.
+function setupWhatsApp(){document.querySelectorAll(".order").forEach(a=>{const msg=`Hi NEON GAME HUB! I want to order ${a.dataset.game}. Listed price: ${a.dataset.price}. Is it available?`;a.href=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;a.target="_blank";a.rel="noopener noreferrer";a.addEventListener("click",e=>{if(WHATSAPP_NUMBER.includes("X")){e.preventDefault();alert("Please edit index.html and replace 947XXXXXXXX with your WhatsApp number first.");}});});}
+function filter(){const q=document.getElementById("search").value.toLowerCase(),cat=document.getElementById("category").value;let n=0;document.querySelectorAll("#grid .card").forEach(c=>{const show=c.dataset.name.toLowerCase().includes(q)&&(cat==="all"||c.dataset.cat===cat);c.style.display=show?"":"none";if(show)n++;});document.getElementById("empty").style.display=n?"none":"block";}
+document.getElementById("search").addEventListener("input",filter);document.getElementById("category").addEventListener("change",filter);setupWhatsApp();
+const softwareSearch=document.getElementById('software-search'), softwareCategory=document.getElementById('software-category');
+function filterSoftware(){const q=softwareSearch.value.toLowerCase(),cat=softwareCategory.value;let n=0;document.querySelectorAll('#software-grid .software-card').forEach(c=>{const show=c.dataset.name.toLowerCase().includes(q)&&(cat==='all'||c.dataset.cat===cat);c.style.display=show?'':'none';if(show)n++;});document.getElementById('software-empty').style.display=n?'none':'block';}
+softwareSearch.addEventListener('input',filterSoftware);softwareCategory.addEventListener('change',filterSoftware);
+const pcGames=[
+ {name:'GTA V',ram:8,gpu:2,cpu:2,storage:110,win:10,note:'Older GTA V editions may have lower requirements; newer editions can need more powerful hardware.'},
+ {name:'Minecraft',ram:4,gpu:1,cpu:2,storage:4,win:7,note:'Estimate is for basic vanilla gameplay. Java/Bedrock edition, render distance, shaders and mods change performance significantly.'},
+ {name:'Euro Truck Simulator 2',ram:8,gpu:2,cpu:2,storage:25,win:10,note:'Large maps and newer updates may benefit from a stronger CPU and GPU.'},
+ {name:'Need for Speed: Most Wanted',ram:2,gpu:0,cpu:1,storage:4,win:7,note:'This estimate refers to the classic 2005 game; the 2012 edition has higher requirements.'},
+ {name:"Assassin's Creed Origins",ram:8,gpu:3,cpu:3,storage:45,win:10,note:'A dedicated graphics card is strongly recommended.'},
+ {name:"Assassin's Creed IV: Black Flag",ram:4,gpu:2,cpu:2,storage:30,win:7,note:'Performance depends on graphics settings and game version.'},
+ {name:'Far Cry 1',ram:1,gpu:0,cpu:1,storage:5,win:7,note:'Classic 2004 release; compatibility on newer Windows versions can vary.'},
+ {name:'Prince of Persia: The Forgotten Sands',ram:2,gpu:1,cpu:1,storage:8,win:7,note:'Rough estimate only; check the official requirements for your edition before buying.'},
+ {name:'Crysis 2',ram:2,gpu:2,cpu:2,storage:10,win:7,note:'Rough estimate for the original Crysis 2 release; remastered editions may need stronger hardware.'},
+ {name:'Call of Duty 1',ram:1,gpu:0,cpu:1,storage:2,win:7,note:'Classic 2003 release; runs easily on almost any modern PC (use Windows XP compatibility mode if needed).'},
+ {name:'Call of Duty 2',ram:1,gpu:0,cpu:1,storage:4,win:7,note:'Classic 2005 release; runs easily on modern PCs.'},
+ {name:'IGI 1 (Project IGI)',ram:1,gpu:0,cpu:1,storage:1,win:7,note:'Minimum: Pentium II 400 MHz, 64 MB RAM, 8 MB GPU, 500 MB storage. Runs easily on modern PCs (use Windows XP SP3 compatibility mode on Windows 10/11).'},
+ {name:'IGI 2: Covert Strike',ram:1,gpu:0,cpu:1,storage:2,win:7,note:'Minimum: Pentium III 700 MHz, 128 MB RAM, 32 MB GPU, 1.9 GB storage. Runs easily on modern PCs (use Windows XP SP3 compatibility mode on Windows 10/11).'}
+];
+document.getElementById('pc-check').addEventListener('click',()=>{const cpu=+document.getElementById('pc-cpu').value,gpu=+document.getElementById('pc-gpu').value,ram=+document.getElementById('pc-ram').value,storage=+document.getElementById('pc-storage').value,win=+document.getElementById('pc-windows').value,mode=document.getElementById('pc-mode').value;const results=document.getElementById('pc-results');results.innerHTML='';pcGames.forEach(g=>{let issues=[];if(ram<g.ram)issues.push('RAM may be too low');if(gpu<g.gpu)issues.push('graphics may be too weak');if(cpu<g.cpu)issues.push('CPU may be too weak');if(storage<g.storage)issues.push('not enough free storage selected');if(win<g.win)issues.push('Windows version may be unsupported');if(mode==='smooth'&&(gpu<g.gpu+1||ram<g.ram+4))issues.push('may not run smoothly at higher settings');let status,cls;if(issues.length===0){status='Likely to run';cls='status-good'}else if(issues.length<=2){status='Might run with low settings';cls='status-mid'}else{status='May struggle / not meet requirements';cls='status-low'}const div=document.createElement('div');div.className='result-card';div.innerHTML=`<h4>${g.name}</h4><p class="result-status ${cls}">${status}</p><p>${issues.length?'Things to check: '+issues.join(', ')+'.':'Your selected specs meet this checker’s rough baseline.'}</p><p>${g.note}</p>`;results.appendChild(div)});});
+
+
+// NEON AI Assistant: useful local knowledge mode. For true generative AI, connect a secure server endpoint.
+const NEON_GAMES=[
+ {name:'GTA V',price:7990,cat:'Action'}, {name:'Minecraft',price:4800,cat:'Sandbox'},
+ {name:'Euro Truck Simulator 2',price:1200,cat:'Simulation'}, {name:'Need for Speed: Most Wanted (2005)',price:800,cat:'Racing'},
+ {name:"Assassin's Creed Origins",price:6999,cat:'Action'}, {name:"Assassin's Creed IV: Black Flag",price:2499,cat:'Action'},
+ {name:'Far Cry 1',price:2599,cat:'Action'}, {name:'Prince of Persia: The Forgotten Sands',price:1499,cat:'Adventure'},
+ {name:'Crysis 2',price:3650,cat:'Action / FPS'},
+ {name:'Call of Duty 1',price:1250,cat:'Action'}, {name:'Call of Duty 2',price:1400,cat:'Action'},
+ {name:'IGI 1',price:300,cat:'Action'}, {name:'IGI 2',price:350,cat:'Action'}
+];
+const aiBox=document.getElementById('ai-box'), aiMessages=document.getElementById('ai-messages'), aiInput=document.getElementById('ai-input');
+document.getElementById('ai-launch').addEventListener('click',()=>{aiBox.classList.add('open');aiBox.setAttribute('aria-hidden','false');aiInput.focus()});
+document.getElementById('ai-close').addEventListener('click',()=>{aiBox.classList.remove('open');aiBox.setAttribute('aria-hidden','true')});
+function aiAdd(text,who='bot'){const el=document.createElement('div');el.className='ai-msg '+who;el.textContent=text;aiMessages.appendChild(el);aiMessages.scrollTop=aiMessages.scrollHeight;return el;}
+function rupees(n){return 'LKR '+Number(n).toLocaleString('en-LK');}
+function neonLocalAnswer(raw){const q=raw.toLowerCase();
+ if(/software|app download|free download|program download|software එකක්|සොෆ්ට්වෙයා/.test(q))return 'Free Software section එකේ Visual Studio Code, OBS Studio, 7-Zip, WinRAR, Blender, GIMP සහ VLC Media Player තියෙනවා. Download buttons ඔයාව official publisher websites වෙත යොමු කරනවා. Menu එකේ “Free Software” තෝරන්න.';
+ if(/price|prices|cost|how much|මිල|ගණන්|කීයද|price list/.test(q))return 'මෙන්න website එකේ දැනට තියෙන game prices:\n'+NEON_GAMES.map(g=>'• '+g.name+' — '+rupees(g.price)).join('\n')+'\n\nOrder කරන්න game එකේ WhatsApp button එක ඔබන්න.';
+ if(/recommend|suggest|which game|game එකක්|recommendation|game ekak/.test(q))return 'ඔයා කැමති game type එක අනුව තෝරන්න:\n• Racing: Need for Speed: Most Wanted (2005) — '+rupees(800)+'\n• Sandbox/building: Minecraft — '+rupees(4800)+'\n• Truck simulation: Euro Truck Simulator 2 — '+rupees(1200)+'\n• Adventure: Prince of Persia: The Forgotten Sands — '+rupees(1499)+'\n• Action/open world: GTA V — '+rupees(7990)+'\n\nඔයාගේ PC specs සහ කැමති genre එක කිව්වොත් තවත් ගැළපෙන game එකක් තෝරන්න උදව් කරන්නම්.';
+ if(/pc|run this|compatib|requirements|graphics card|ram|processor|gpu|මගේ pc|computer/.test(q))return 'PC compatibility බලන්න page එකේ “Can My PC Run This Game?” section එකට යන්න. CPU, graphics, RAM, free storage සහ Windows version තෝරලා “Check My PC” ඔබන්න. මේක rough estimate එකක් විතරයි; exact performance guarantee එකක් නෙවෙයි. ඔයාගේ CPU, GPU, RAM සහ Windows version මෙතන දුන්නොත් මටත් guide කරන්න පුළුවන්.';
+ if(/order|buy|purchase|whatsapp|ගන්න|order කර|මිලදී/.test(q))return 'Order කරන්න:\n1. Games section එකෙන් game එක තෝරන්න.\n2. ඒ game එකේ WhatsApp order button එක ඔබන්න.\n3. WhatsApp message එකේ game name සහ price බලලා send කරන්න.\n\nWhatsApp: 0726773706. Payment හෝ delivery details seller සමඟ confirm කරන්න.';
+ if(/hello|hi|hey|ayubowan|ආයුබෝවන්|kohomada/.test(q))return 'Hi! 👋 NEON GAME HUB එකට සාදරයෙන් පිළිගන්නවා. Game prices, game recommendations, PC compatibility හෝ order කරන විදිහ ගැන අහන්න.';
+ if(/prince of persia|forgotten sands/.test(q))return 'Prince of Persia: The Forgotten Sands — '+rupees(1499)+'. Adventure/action game එකක්. Order කිරීමට Games section එකේ WhatsApp button එක භාවිතා කරන්න.';
+ if(/need for speed|nfs|most wanted|2005/.test(q))return 'Need for Speed: Most Wanted (2005) — '+rupees(800)+'. මේක 2005 classic version එකයි; 2012 version එක නෙවෙයි. Order කිරීමට game card එකේ WhatsApp button එක ඔබන්න.';
+ const match=NEON_GAMES.find(g=>q.includes(g.name.toLowerCase())|| (g.name==='Minecraft'&&q.includes('minecraft')) || (g.name==='GTA V'&&/gta\s*v|gta 5/.test(q)) || (g.name==='Euro Truck Simulator 2'&&/ets2|euro truck/.test(q)));
+ if(match)return match.name+' — '+rupees(match.price)+'. '+match.cat+' game එකක්. Order කිරීමට game card එකේ WhatsApp button එක ඔබන්න.';
+ return 'මට දැනට website එකේ games, listed prices, recommendations, PC checker සහ ordering ගැන උදව් කරන්න පුළුවන්. 🙂 මේ ප්‍රශ්නයට ChatGPT වගේ open-ended answer ලබාගැනීමට secure AI API/backend එකක් connect කළ යුතුයි. ඔයාට දැනගන්න ඕන game එකේ නම හෝ PC specs කියන්න.';
+}
+async function neonAsk(message){aiAdd(message,'user');aiInput.value='';const submit=document.querySelector('#ai-form button');submit.disabled=true;submit.textContent='…';
+ try{
+  // Optional backend integration: configure a same-origin POST /api/chat endpoint to return {reply:"..."}.
+  const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
+  if(response.ok){const data=await response.json();if(data&&typeof data.reply==='string'&&data.reply.trim()){aiAdd(data.reply);submit.disabled=false;submit.textContent='Send';aiInput.focus();return;}}
+ }catch(e){}
+ aiAdd(neonLocalAnswer(message));
+ submit.disabled=false;submit.textContent='Send';aiInput.focus();
+}
+document.getElementById('ai-form').addEventListener('submit',e=>{e.preventDefault();const v=aiInput.value.trim();if(v)neonAsk(v)});
+document.querySelectorAll('.ai-quick button').forEach(b=>b.addEventListener('click',()=>neonAsk(b.dataset.prompt)));
+
+</script>
+<script>
+(function(){
+ const toggle=document.getElementById('menu-toggle');
+ const links=document.getElementById('site-links');
+ if(!toggle||!links)return;
+ function closeMenu(){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation menu');}
+ toggle.addEventListener('click',function(){const opening=!links.classList.contains('open');links.classList.toggle('open',opening);toggle.setAttribute('aria-expanded',String(opening));toggle.setAttribute('aria-label',opening?'Close navigation menu':'Open navigation menu');});
+ links.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeMenu);});
+ document.addEventListener('click',function(event){if(!links.contains(event.target)&&!toggle.contains(event.target))closeMenu();});
+ document.addEventListener('keydown',function(event){if(event.key==='Escape')closeMenu();});
+})();
+</script>
+
+<script>
+(function(){
+ const modal=document.getElementById('game-modal');
+ if(!modal)return;
+ const title=document.getElementById('game-modal-title');
+ const note=document.getElementById('game-modal-note');
+ const minList=document.getElementById('game-min-specs');
+ const recList=document.getElementById('game-rec-specs');
+ const order=document.getElementById('game-modal-order');
+ const close=document.getElementById('game-modal-close');
+ const specs={
+  'GTA V':{min:['OS: Windows 10 64-bit (legacy editions may support older Windows)','CPU: Intel Core 2 Quad Q6600 / AMD Phenom 9850','RAM: 4 GB','GPU: NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB','Storage: 110 GB free'],rec:['OS: Windows 10/11 64-bit','CPU: Intel Core i5-3470 / AMD FX-8350','RAM: 8 GB','GPU: NVIDIA GTX 660 2 GB / AMD HD 7870 2 GB','Storage: 110 GB free']},
+  'Minecraft':{min:['OS: Windows 10/11 64-bit','CPU: Intel Core i3-3210 / AMD A8-7600','RAM: 4 GB','GPU: Intel HD 4000 / AMD Radeon R5','Storage: 2 GB free (more for worlds/mods)'],rec:['OS: Windows 10/11 64-bit','CPU: Intel Core i5 / AMD Ryzen 5 class','RAM: 8 GB','GPU: NVIDIA GTX 700 series / AMD RX 200 series or better','Storage: 4 GB+ free']},
+  'Euro Truck Simulator 2':{min:['OS: Windows 10 64-bit','CPU: Intel Core i5-6400 / AMD Ryzen 3 1200','RAM: 8 GB','GPU: NVIDIA GTX 660 / AMD RX 460 class','Storage: 25 GB free'],rec:['OS: Windows 10/11 64-bit','CPU: Intel Core i5-9600 / AMD Ryzen 5 3600','RAM: 12 GB','GPU: NVIDIA GTX 1660 / AMD RX 590 class','Storage: 25 GB+ free']},
+  'Need for Speed: Most Wanted (2005)':{min:['OS: Windows XP/Vista/7 (older game; modern Windows may need compatibility mode)','CPU: 1.4 GHz single-core','RAM: 256 MB','GPU: DirectX 9 compatible, 32 MB','Storage: 3 GB free'],rec:['OS: Windows 7/10/11 (compatibility mode may be needed)','CPU: 2.0 GHz or faster','RAM: 512 MB or more','GPU: DirectX 9 compatible, 128 MB','Storage: 3 GB free']},
+  "Assassin's Creed Origins":{min:['OS: Windows 10 64-bit','CPU: Intel Core i5-2400S / AMD FX-6350','RAM: 6 GB','GPU: NVIDIA GTX 660 2 GB / AMD R9 270 2 GB','Storage: 42 GB free'],rec:['OS: Windows 10/11 64-bit','CPU: Intel Core i7-3770 / AMD FX-8350','RAM: 8 GB','GPU: NVIDIA GTX 970 4 GB / AMD R9 290 4 GB','Storage: 42 GB free']},
+  'Assassin\\'s Creed IV: Black Flag':{min:['OS: Windows 10 64-bit','CPU: Intel Core2Quad Q8400 / AMD Athlon II X4 620','RAM: 2 GB','GPU: NVIDIA GTX 260 / AMD HD  4870','Storage: 30 GB free'],rec:['OS: Windows 10/11 64-bit','CPU: Intel Core i5- 2400S / AMD Phenom II x4 940','RAM: 4 GB','GPU: NVIDIA GTX 560 Ti / AMD HD  5850','Storage: 30 GB free']},
+  'Far Cry 1':{min:['OS: Windows 10/11 (compatibility mode may be needed)','CPU: 1 GHz Pentium III / AMD Athlon','RAM: 256 MB','GPU: DirectX 9 compatible, 64 MB','Storage: 4 GB free'],rec:['OS: Windows 10/11','CPU: 2 GHz or faster','RAM: 512 MB','GPU: DirectX 9 compatible, 128 MB','Storage: 4 GB free']},
+  'Prince of Persia: The Forgotten Sands':{min:['OS: Windows XP/Vista/7 (modern Windows may need compatibility mode)','CPU: Intel Pentium D 2.6 GHz / AMD Athlon 64 X2 3800+','RAM: 1 GB (XP) / 2 GB (Vista/7)','GPU: DirectX 9 compatible, 256 MB','Storage: 8 GB free'],rec:['OS: Windows 7/10/11 (compatibility mode may be needed)','CPU: Intel Core 2 Duo 2.2 GHz / AMD Athlon X2 4400+','RAM: 2 GB','GPU: NVIDIA GeForce 9600 GT / AMD Radeon HD 4670','Storage: 8 GB free']},
+  'Call of Duty 1':{min:['OS: Windows 98/ME/2000/XP','CPU: 600 MHz Pentium III / Athlon','RAM: 128 MB','GPU: 32 MB DirectX 9-compatible video card','Storage: 1.4 GB free'],rec:['OS: Windows 2000/XP','CPU: 1 GHz Pentium III / Athlon','RAM: 256 MB','GPU: 64 MB DirectX 9-compatible video card','Storage: 1.4 GB free']},
+  'IGI 1':{min:['OS: Windows 98/ME/2000/XP','CPU: 400 MHz Pentium II / AMD equivalent','RAM: 64 MB','GPU: DirectX-compatible 8 MB 3D graphics card','Storage: 500 MB free'],rec:['OS: Windows 2000/XP','CPU: 700 MHz Pentium III / AMD equivalent','RAM: 128 MB','GPU: DirectX-compatible 16 MB 3D graphics card','Storage: 500 MB free']},
+  'IGI 2':{min:['OS: Windows 98/ME/2000/XP','CPU:  Pentium III 700 MHz / AMD equivalent','RAM: 128 MB','GPU: DirectX 8.1-compatible 32 MB graphics card','Storage: Approx. 1.9 GB free'],rec:['OS: Windows 2000/XP','CPU: Pentium III 1 GHz / AMD equivalent','RAM: 256 MB','GPU: DirectX 8.1-compatible 64 MB graphics card','Storage: Approx. 1.9 GB free']},
+  'Call of Duty 2':{min:['OS: Windows 2000/XP','CPU: 1.4 GHz Pentium 4 / Athlon XP','RAM: 256 MB','GPU: DirectX 9.0c-compatible, 64 MB','Storage: 4 GB free'],rec:['OS: Windows XP','CPU: 2.4 GHz Pentium 4 / Athlon XP','RAM: 512 MB','GPU: DirectX 9.0c-compatible, 128 MB','Storage: 4 GB free']},
+  'Crysis 2':{min:['OS: Windows XP/Vista/7 (modern Windows may need compatibility mode)','CPU: Intel Core 2 Duo 2.4 GHz / AMD Athlon 64 X2 2.7 GHz','RAM: 2 GB','GPU: NVIDIA 8800 GT / AMD HD 3850, 512 MB','Storage: 9 GB free'],rec:['OS: Windows 7/10/11 (compatibility mode may be needed)','CPU: Intel Core 2 Duo 2.8 GHz / AMD Athlon 64 X2 3.0 GHz','RAM: 3 GB','GPU: NVIDIA GTX 560 / AMD Radeon HD 5770','Storage: 9 GB free']}
+ };
+ function fill(list,items){list.replaceChildren();items.forEach(function(item){const li=document.createElement('li');li.textContent=item;list.appendChild(li);});}
+ function openCard(card){
+  const game=card.dataset.name;
+  const price=card.querySelector('.order')?.dataset.price||card.querySelector('.price')?.textContent||'';
+  const data=specs[game] || (game==='Need for Speed: Most Wanted 2005' ? specs['Need for Speed: Most Wanted (2005)'] : null);
+  if(!data)return;
+  title.textContent=game;
+  note.textContent='Listed price: '+price+'. PC requirements are approximate reference estimates; check the publisher’s requirements for the exact edition before ordering.';
+  fill(minList,data.min);fill(recList,data.rec);
+  const message='Hi NEON GAME HUB! I want to order '+game+'. Listed price: '+price+'. Is it available?';
+  if(game==='Crysis 2'){
+   order.removeAttribute('href');order.textContent='⛔ NOT AVAILABLE';order.style.pointerEvents='none';order.style.background='#451321';order.style.color='#ffdce2';order.style.boxShadow='none';
+  }else{
+   order.textContent='🟢 Order This Game on WhatsApp';order.style.pointerEvents='';order.style.background='';order.style.color='';order.style.boxShadow='';
+   order.href='https://wa.me/94726773706?text='+encodeURIComponent(message);
+  }
+  modal.classList.add('open');document.body.style.overflow='hidden';close.focus();
+ }
+ function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
+ document.querySelectorAll('#grid .card').forEach(function(card){
+  card.classList.add('game-card');card.setAttribute('tabindex','0');card.setAttribute('role','button');
+  card.setAttribute('aria-label','View details and PC requirements for '+card.dataset.name);
+  card.addEventListener('click',function(e){if(e.target.closest('a,button'))return;openCard(card);});
+  const reqButton=card.querySelector('.view-requirements');if(reqButton)reqButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openCard(card);});
+  card.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target===card){e.preventDefault();openCard(card);}});
+ });
+ close.addEventListener('click',closeModal);
+ modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+})();
+</script>
+
+<script>
+(function(){
+ const db={
+ 'GTA V':[['Windows 10 64-bit','Intel Core 2 Quad Q6600 / AMD Phenom 9850','4 GB RAM','NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB','125 GB storage'],['Windows 10 64-bit','Intel Core i5-3470 / AMD FX-8350','8 GB RAM','NVIDIA GTX 660 2 GB / AMD HD 7870 2 GB','125 GB storage']],
+ 'Minecraft':[['Windows 10 64-bit or later','Intel Core i3-10100 / AMD Ryzen 3 3100 (4 cores)','8 GB RAM with discrete GPU; 12 GB with integrated GPU','Vulkan 1.3 GPU, 2 GB VRAM (e.g. GTX 950 / RX 460 / Arc A310)','Java Edition; storage varies by worlds'],['Windows 11 64-bit','Intel Core i5-12400 / AMD Ryzen 5 5600','16 GB RAM','RTX 2060 / RX 5600 XT / Intel Arc A580 or equivalent, 6 GB VRAM target','Storage varies by worlds']],
+ 'Euro Truck Simulator 2':[['Windows 10 64-bit','Intel Core i5-6400 / AMD Ryzen 3 1200','8 GB RAM','NVIDIA GTX 660 / AMD RX 460 / Intel HD 630 (2 GB VRAM)','25 GB storage'],['Windows 10 64-bit','Intel Core i5-9600 / AMD Ryzen 5 3600','12 GB RAM','NVIDIA GTX 1660 / AMD RX 590','25 GB storage']],
+ 'Need for Speed: Most Wanted (2005)':[['Windows 98/ME/2000/XP (original release-era OS)','1.4 GHz CPU','256 MB RAM','32 MB DirectX 9-compatible graphics card','3 GB storage'],['Windows 2000/XP (original release-era OS)','2.0 GHz or faster CPU','512 MB RAM','64 MB DirectX 9-compatible graphics card','3 GB storage']],
+ "Assassin's Creed Origins":[['Windows 10 64-bit','Intel Core i5-2400S / AMD FX-6350','6 GB RAM','NVIDIA GTX 660 2 GB / AMD R9 270 2 GB','75 GB storage'],['Windows 10 64-bit','Intel Core i7-3770 / AMD FX-8350','8 GB RAM','NVIDIA GTX 760 4 GB / AMD R9 280X 3 GB','75 GB storage']],
+ "Assassin's Creed IV: Black Flag":[['Windows 10 64-bit','Intel Core 2 Quad Q8400 / AMD Athlon II X4 620','2 GB RAM','NVIDIA GTX 260 / AMD Radeon HD 4870 (512 MB)','30 GB storage'],['Windows 10 64-bit','Intel Core i5-2400S / AMD Phenom II X4 940','4 GB RAM','NVIDIA GTX 470 / AMD Radeon HD 5850 (1 GB)','30 GB storage']],
+ 'Far Cry 1':[['Windows 2000 / XP','AMD Athlon 1 GHz / Intel Pentium III 1 GHz','256 MB RAM','64 MB DirectX 9.0b graphics card','4 GB storage'],['Windows 2000 / XP','AMD Athlon 2–3 GHz / Intel Pentium 4 2–3 GHz','512–1024 MB RAM','128 MB GeForce 4 / GeForce FX 5950 / Radeon 9500–9800 XT','4 GB storage']],
+ 'Prince of Persia: The Forgotten Sands':[['Windows XP SP3 / Vista SP2','Intel Pentium D 2.6 GHz / AMD Athlon 64 X2 3800+','1 GB RAM (XP) / 2 GB (Vista)','256 MB DirectX 9.0c GPU, Shader Model 3.0','8 GB storage'],['Windows XP / Vista','Intel Core 2 Duo 2.2 GHz / AMD Athlon 64 X2 4400+','2 GB RAM (XP) / 4 GB (Vista)','512 MB DirectX 9.0c GPU','8 GB storage']],
+ 'Call of Duty 1':[['Windows 98/ME/2000/XP','600 MHz Pentium III / Athlon','128 MB RAM','32 MB DirectX 9-compatible GPU','1.4 GB storage'],['Windows 2000/XP','1 GHz Pentium III / Athlon','256 MB RAM','64 MB DirectX 9-compatible GPU','1.4 GB storage']],
+ 'IGI 1':[['Windows 98/ME/2000/XP','400 MHz Pentium II / AMD equivalent','64 MB RAM','8 MB DirectX-compatible 3D GPU','Approx. 300 MB storage'],['Windows 2000/XP','700 MHz Pentium III / AMD equivalent','128 MB RAM','16 MB DirectX-compatible 3D GPU','Approx. 300 MB storage']],
+ 'IGI 2':[['Windows 98/ME/2000/XP','Pentium III 700 MHz / AMD equivalent','128 MB RAM','32 MB DirectX 8.1-compatible GPU','Approx. 1.9 GB storage'],['Windows 2000/XP','Pentium III 1 GHz / AMD equivalent','256 MB RAM','64 MB DirectX 8.1-compatible GPU','Approx. 1.9 GB storage']],
+ 'Call of Duty 2':[['Windows 2000/XP','1.4 GHz Pentium 4 / Athlon XP','256 MB RAM','64 MB DirectX 9-compatible GPU','4 GB storage'],['Windows XP','2.4 GHz Pentium 4 / Athlon XP','512 MB RAM','128 MB DirectX 9-compatible GPU','4 GB storage']],
+ 'Crysis 2':[['Windows XP / Vista / 7 (latest service pack)','Intel Core 2 Duo 2 GHz / AMD Athlon 64 X2 2 GHz','2 GB RAM','NVIDIA 8800 GT 512 MB / ATI Radeon HD 3850 512 MB','9 GB storage'],['EA does not list a separate recommended specification for the original Crysis 2 PC release.','Use the minimum specification as the published baseline.','More capable hardware may improve performance.','DirectX 9.0c','9 GB storage']]
+ };
+ const sourceLinks={
+ 'GTA V':'https://support.rockstargames.com/articles/lMQXeP2Z1mN3g9oZiBZFR/grand-theft-auto-v-pc-system-requirements',
+ 'Minecraft':'https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc?tabs=%7B%22details%22%3A0%7D',
+ 'Euro Truck Simulator 2':'https://eurotrucksimulator2.com/download.php',
+ 'Need for Speed: Most Wanted (2005)':'https://www.mobygames.com/game/2005/need-for-speed-most-wanted/',
+ "Assassin's Creed Origins":'https://www.ubisoft.com/en-gb/help/assassins-creed-origins/article/system-requirements-of-assassins-creed-origins/000064383',
+ "Assassin's Creed IV: Black Flag":'https://www.ubisoft.com/en-gb/help/assassins-creed-iv-black-flag/purchases-and-rewards/article/system-requirements-for-assassins-creed-iv-black-flag/000078336',
+ 'Far Cry 1':'https://store.steampowered.com/app/13520/Far_Cry/',
+ 'Prince of Persia: The Forgotten Sands':'https://store.steampowered.com/app/33320/Prince_of_Persia_The_Forgotten_Sands/',
+ 'Crysis 2':'https://www.ea.com/games/crysis/crysis-2',
+ 'Call of Duty 1':'https://store.steampowered.com/app/2620/Call_of_Duty/',
+ 'Call of Duty 2':'https://store.steampowered.com/app/2630/Call_of_Duty_2/'
+ };
+
+ function show(button){const card=button.closest('.card');if(!card)return;let name=card.dataset.name||card.querySelector('h3')?.textContent?.trim()||'Game';if(name==='Need for Speed: Most Wanted 2005')name='Need for Speed: Most Wanted (2005)';const d=db[name];if(!d){alert('PC requirements not found for '+name);return;}let modal=document.getElementById('requirements-popup');if(!modal){modal=document.createElement('div');modal.id='requirements-popup';modal.style.cssText='position:fixed;inset:0;z-index:99999;background:#03030df2;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Arial,sans-serif;';modal.innerHTML='<div style="max-width:760px;width:100%;max-height:90vh;overflow:auto;background:#10152d;color:#fff;border:1px solid #00eaff;border-radius:16px;padding:22px;box-shadow:0 0 30px #00eaff55"><button id="req-close" style="float:right;background:#252b49;color:white;border:1px solid #aaa;border-radius:8px;padding:7px 13px;font-size:20px;cursor:pointer">×</button><h2 id="req-title" style="color:#00eaff;margin-top:8px"></h2><div id="req-cols" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px"></div><p style="color:#bbc4df;font-size:13px">Specifications are transcribed from publisher/store listings where available. Older games list their original release-era Windows versions; modern Windows compatibility is not guaranteed. Crysis 2 has no separate recommended spec published by EA.</p></div>';document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove()});modal.querySelector('#req-close').addEventListener('click',()=>modal.remove());}modal.querySelector('#req-title').textContent=name+' – PC Requirements';modal.querySelector('#req-cols').innerHTML='';[['Minimum Requirements',d[0]],['Recommended Requirements',d[1]]].forEach(([label,items])=>{const box=document.createElement('section');box.style.cssText='background:#080d20;border:1px solid #00eaff66;border-radius:12px;padding:14px';const h=document.createElement('h3');h.style.color='#00eaff';h.textContent=label;const ul=document.createElement('ul');ul.style.cssText='line-height:1.8;padding-left:20px';items.forEach(x=>{const li=document.createElement('li');li.textContent=x;ul.appendChild(li)});box.append(h,ul);modal.querySelector('#req-cols').appendChild(box)});const oldSource=modal.querySelector('#req-source');if(oldSource)oldSource.remove();const src=document.createElement('p');src.id='req-source';src.style.cssText='margin-top:14px;font-size:13px';const a=document.createElement('a');a.href=sourceLinks[name]||'#';a.target='_blank';a.rel='noopener noreferrer';a.textContent='View published system requirements source';a.style.color='#00eaff';src.appendChild(a);modal.querySelector('#req-cols').after(src);}
+ document.addEventListener('click',function(e){const b=e.target.closest('.view-requirements');if(!b)return;e.preventDefault();e.stopPropagation();show(b)},true);
+})();
+</script>
+
+<script>
+(function(){
+ const cards=document.querySelectorAll('#grid .card');
+ cards.forEach(function(card){
+   const game=card.dataset.name||'Game';
+   const btn=document.createElement('button');
+   btn.type='button';btn.className='game-rate-btn';
+   btn.setAttribute('aria-label','Rate '+game);
+   function refresh(){let v=localStorage.getItem('neon-rating:'+game);btn.textContent=v?'⭐ '+v+'/5':'⭐ Rate';}
+   refresh();
+   btn.addEventListener('click',function(e){
+     e.preventDefault();e.stopPropagation();
+     const old=localStorage.getItem('neon-rating:'+game)||'0';
+     const overlay=document.createElement('div');overlay.className='rate-dialog';
+     const panel=document.createElement('div');panel.className='rate-panel';
+     const heading=document.createElement('h3');heading.textContent='Rate '+game;
+     const note=document.createElement('p');note.className='rate-note';note.textContent='ඔයාගේ Rating එක තෝරන්න (1–5 Stars).';
+     const stars=document.createElement('div');stars.className='rate-stars';
+     const close=document.createElement('button');close.type='button';close.className='rate-close';close.textContent='Close';
+     function paint(n){stars.querySelectorAll('button').forEach((s,i)=>{s.classList.toggle('selected',i<n);s.textContent=i<n?'★':'☆';});}
+     for(let i=1;i<=5;i++){const s=document.createElement('button');s.type='button';s.textContent='☆';s.setAttribute('aria-label',i+' stars');s.addEventListener('click',function(){localStorage.setItem('neon-rating:'+game,String(i));refresh();note.textContent='ස්තුතියි! ඔයාගේ Rating එක: '+i+'/5 ⭐';paint(i);setTimeout(()=>overlay.remove(),650);});stars.appendChild(s);}
+     paint(Number(old));close.addEventListener('click',()=>overlay.remove());
+     overlay.addEventListener('click',ev=>{if(ev.target===overlay)overlay.remove();});
+     panel.append(heading,note,stars,close);overlay.appendChild(panel);document.body.appendChild(overlay);
+   });
+   card.insertBefore(btn,card.firstChild);
+ });
+})();
+</script>
+
+
+
+</body></html>
